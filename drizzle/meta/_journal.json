@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1717575160777,
+      "tag": "0000_fast_hiroim",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1717576003255,
+      "tag": "0001_skinny_captain_britain",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1717610896469,
+      "tag": "0002_loving_spacker_dave",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1717653473614,
+      "tag": "0003_nosy_trauma",
+      "breakpoints": true
+    }
+  ]
+}
