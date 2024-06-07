@@ -20,7 +20,7 @@ import { Select } from "@/components/select";
 import { DatePicker } from "@/components/date-picker";
 import { Textarea } from "@/components/ui/textarea";
 import { AmountInput } from "@/components/amount-input";
-import { convertAmountToMilliUnits } from "@/lib/utils";
+import {  convertAmountToMilliUnits } from "@/lib/utils";
 
 
 
@@ -30,7 +30,7 @@ const formSchema = z.object({
     categoryId: z.string().nullable().optional(),
     amount: z.string(),
     payee: z.string(),
-    note: z.string().nullable().optional(),
+    notes: z.string().nullable().optional(),
 });
 
 const apiSchema = insertTransactionsSchema.omit({
@@ -72,11 +72,12 @@ export const TransactionForm = ({
         onSubmit({
             ...values,
             amount: amountInMilliUnits,
-        })
+            })
     }
     const handleDelete = () => {
         onDelete?.();
     }
+
     return (
         <Form {...form}>
             <form
@@ -177,12 +178,12 @@ export const TransactionForm = ({
                     )}
                 />
                 <FormField
-                    name="note"
+                    name="notes"
                     control={form.control}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>
-                                Payee
+                                Notes
                             </FormLabel>
                             <FormControl>
                                 <Textarea

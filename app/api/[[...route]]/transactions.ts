@@ -96,7 +96,10 @@ const app = new Hono()
         })
         .from(transactions)
         .innerJoin(accounts, eq(transactions.accountId, accounts.id))
-        .where(and(eq(accounts.userId, auth.userId), eq(transactions.id, id)));
+        .where(and(
+          eq(transactions.id, id),
+          eq(accounts.userId, auth.userId),
+          ));
 
       if (!data) return c.json({ error: "Not found" }, 404);
       return c.json({ data });

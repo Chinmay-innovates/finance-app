@@ -46,9 +46,9 @@ export const transactionsRelation = relations(transactions, ({ one }) => ({
     fields: [transactions.accountId],
     references: [accounts.id],
   }),
-  categories: one(accounts, {
+  categories: one(categories, {
     fields: [transactions.categoryId],
-    references: [accounts.id],
+    references: [categories.id],
   }),
 }));
 export const insertTransactionsSchema = createInsertSchema(transactions, {
