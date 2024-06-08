@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { format, parse} from "date-fns";
+import { format, parse } from "date-fns";
 import {
     Card,
     CardContent,
@@ -23,15 +23,15 @@ interface SelectedColumsState {
 }
 
 type Props = {
-    data: string[][];
+    data: [][];
     onCancel: () => void;
-    onSbumit: (data: any) => void;
+    onSubmit: (data: any) => void;
 }
 
 export const ImportCard = ({
     data,
     onCancel,
-    onSbumit
+    onSubmit
 }: Props) => {
     const [selectedColums, setSelectedColums] = useState<SelectedColumsState>({})
     const headers = data[0];
@@ -65,7 +65,7 @@ export const ImportCard = ({
 
         // converting [][][] => [{}, {}, {}]
         const mappedData = {
-            header: headers.map((_header, idx) => {
+            headers: headers.map((_header, idx) => {
                 const columnIndex = getColumnIndex(`column_${idx}`);
                 return selectedColums[`column_${columnIndex}`] || null;
             }),
@@ -82,25 +82,22 @@ export const ImportCard = ({
             }).filter((row) => row.length > 0),
         };
 
-        console.log({ mappedData });
         const arrayOfData = mappedData.body.map((row) => {
             return row.reduce((acc: any, cell, idx) => {
 
-                const header = mappedData.header[idx];
+                const header = mappedData.headers[idx];
 
                 if (header !== null) acc[header] = cell;
                 return acc;
             }, {})
         });
 
-        console.log({ arrayOfData });
-
         const formattedData = arrayOfData.map((item) => ({
             ...item,
             amount: convertAmountToMilliUnits(parseFloat(item.amount)),
             date: format(parse(item.date, dateFormat, new Date()), outputFormat)
         }));
-        console.log({ formattedData });
+        onSubmit(formattedData)
     };
     return (
         <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
